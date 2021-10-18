@@ -24,6 +24,27 @@ class MovieDetailEntity {
     required this.actors,
     required this.writers,
   });
+
+  static MovieDetailEntity toEntity(Map data) {
+    List<Rating> rating = [];
+    for (int i = 0; i < data['Ratings'].length; i++) {
+      rating.add(Rating(
+          source: data['Ratings'][i]['Source'],
+          value: data['Ratings'][i]['Value']));
+    }
+    return MovieDetailEntity(
+      metaData: MovieMetaEntity.toEntity(data),
+      genre: data['Genre'],
+      ratings: rating,
+      releasedYear: int.parse(data['Year']),
+      country: data['Country'],
+      language: data['Language'],
+      plot: data['Plot'],
+      director: data['Director'].toString().split(','),
+      actors: data['Actors'].toString().split(','),
+      writers: data['Writer'].toString().split(','),
+    );
+  }
 }
 
 class Rating {

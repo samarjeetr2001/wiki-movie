@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../main.dart';
+import 'home/presentation/home-page/home_view.dart';
 
 class NavigationService {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
@@ -13,7 +13,7 @@ class NavigationService {
       case homeRoute:
         return MaterialPageRoute(
             settings: const RouteSettings(name: NavigationService.homeRoute),
-            builder: (_) => const MyHomePage(title: "Home page"));
+            builder: (_) => HomeView());
       default:
         throw Exception("NavigationService: Invalid Navigation ");
     }

@@ -1,7 +1,9 @@
 // http://www.omdbapi.com/?i=tt3896198&apikey=daf9df16
+import 'package:assignment/app/home/presentation/home-page/home_controller.dart';
 import 'package:assignment/injection_container.dart' as di;
 import 'package:flutter/material.dart';
 
+import 'app/home/presentation/home-page/home_view.dart';
 import 'app/navigation_service.dart';
 import 'core/app_theme/core_theme.dart';
 
@@ -17,17 +19,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      navigatorKey: di.serviceLocator<NavigationService>().navigatorKey,
-      onGenerateRoute: NavigationService.generateRoute,
-      title: 'Wiki-Movies',
-      theme: ThemeData(
-        visualDensity: VisualDensity.adaptivePlatformDensity,
-        scaffoldBackgroundColor: CoreTheme.backGroundColor,
-        primarySwatch: createMaterialColor(CoreTheme.secondaryColor),
-      ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
-    );
+        debugShowCheckedModeBanner: false,
+        navigatorKey: di.serviceLocator<NavigationService>().navigatorKey,
+        onGenerateRoute: NavigationService.generateRoute,
+        title: 'Wiki-Movies',
+        theme: ThemeData(
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          scaffoldBackgroundColor: CoreTheme.backGroundColor,
+          primarySwatch: createMaterialColor(CoreTheme.secondaryColor),
+        ),
+        home: HomeView());
   }
 
   MaterialColor createMaterialColor(Color color) {
@@ -52,8 +53,10 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key, required this.title, required this.controller})
+      : super(key: key);
   final String title;
+  final HomeController controller;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
@@ -63,6 +66,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
+    widget.controller.getMovies(name: "");
     setState(() {
       _counter++;
     });
