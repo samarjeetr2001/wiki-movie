@@ -1,5 +1,4 @@
 // http://www.omdbapi.com/?i=tt3896198&apikey=daf9df16
-//http://www.omdbapi.com/?t=Avengers&y=2020&apikey=daf9df16
 import 'package:assignment/injection_container.dart' as di;
 import 'package:flutter/material.dart';
 
