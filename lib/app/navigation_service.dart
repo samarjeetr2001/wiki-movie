@@ -1,3 +1,5 @@
+import 'package:assignment/app/home/domain/entity/movie_detail_entity.dart';
+import 'package:assignment/app/home/presentation/detail-page/detail_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -7,6 +9,7 @@ class NavigationService {
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   static const String homeRoute = "/home";
+  static const String detailRoute = "/detail";
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -14,6 +17,13 @@ class NavigationService {
         return MaterialPageRoute(
             settings: const RouteSettings(name: NavigationService.homeRoute),
             builder: (_) => HomeView());
+
+      case detailRoute:
+        return MaterialPageRoute(
+            settings: const RouteSettings(name: NavigationService.detailRoute),
+            builder: (_) => MovieDetailView(
+                  movieDetailEntity: settings.arguments as MovieDetailEntity,
+                ));
       default:
         throw Exception("NavigationService: Invalid Navigation ");
     }

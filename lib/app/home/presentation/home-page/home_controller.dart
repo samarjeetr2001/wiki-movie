@@ -35,14 +35,25 @@ class HomeController extends Controller {
     return _stateMachine.getCurrentState();
   }
 
+  void navigateToDetailPage({required MovieDetailEntity movie}) {
+    _navigationService.navigateTo(NavigationService.detailRoute,
+        arguments: movie);
+  }
+
   void getMovies({required String name}) {
+    _stateMachine.onEvent(HomeSearchMovieEvent());
+    refreshUI();
     _presenter.getMovies(
       observer: UseCaseObserver(
         () {},
         (error) {
+          _stateMachine.onEvent(HomeErrorEvent());
+          refreshUI();
           print('Error in Get Movie $error');
         },
         onNextFunction: (MovieDetailEntity movie) {
+          _stateMachine.onEvent(HomeInitializedEvent(movieDetailEntity: movie));
+          refreshUI();
           print(movie);
         },
       ),
