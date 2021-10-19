@@ -9,8 +9,7 @@ class MovieRepositoryImpl extends MovieRepository {
   Uri lastUri = Uri.parse('http://www.google.com');
   @override
   Future<MovieDetailEntity> getMovies({required String name}) async {
-    const String url =
-        "http://www.omdbapi.com/?t=Avengers: endgame&apikey=daf9df16";
+    String url = "http://www.omdbapi.com/?t=$name&apikey=daf9df16";
     Uri uri = Uri.parse(url);
     if (movieDetailEntity == null || lastUri != uri) {
       await fetchMovies(uri: uri);

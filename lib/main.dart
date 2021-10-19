@@ -1,6 +1,7 @@
 // http://www.omdbapi.com/?i=tt3896198&apikey=daf9df16
 import 'package:assignment/injection_container.dart' as di;
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'app/home/presentation/home-page/home_view.dart';
 import 'app/navigation_service.dart';

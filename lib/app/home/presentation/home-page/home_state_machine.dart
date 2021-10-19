@@ -14,7 +14,8 @@ class HomeStateMachine extends StateMachine<HomeState, HomeEvent> {
         break;
 
       case HomeErrorEvent:
-        newState = HomeErrorState();
+        HomeErrorEvent errorEvent = event as HomeErrorEvent;
+        newState = HomeErrorState(errorEvent.errorMsg);
         break;
 
       case HomeInitializedEvent:
@@ -33,7 +34,11 @@ class HomeInitState extends HomeState {}
 
 class HomeLoadingState extends HomeState {}
 
-class HomeErrorState extends HomeState {}
+class HomeErrorState extends HomeState {
+  final String errorMsg;
+
+  HomeErrorState(this.errorMsg);
+}
 
 class HomeInitializedState extends HomeState {
   final MovieDetailEntity movieDetailEntity;
@@ -45,7 +50,11 @@ class HomeEvent {}
 
 class HomeSearchMovieEvent extends HomeEvent {}
 
-class HomeErrorEvent extends HomeEvent {}
+class HomeErrorEvent extends HomeEvent {
+  final String errorMsg;
+
+  HomeErrorEvent(this.errorMsg);
+}
 
 class HomeInitializedEvent extends HomeEvent {
   final MovieDetailEntity movieDetailEntity;

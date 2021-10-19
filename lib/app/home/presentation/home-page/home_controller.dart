@@ -47,7 +47,7 @@ class HomeController extends Controller {
       observer: UseCaseObserver(
         () {},
         (error) {
-          _stateMachine.onEvent(HomeErrorEvent());
+          _stateMachine.onEvent(HomeErrorEvent(error.toString()));
           refreshUI();
           print('Error in Get Movie $error');
         },
